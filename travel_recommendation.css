@@ -96,10 +96,19 @@ nav ul {
     border: none;
     cursor: pointer;
   }
+
+  .clear {
+    background-color: black    
+  }
+
+  button.clear:hover{
+    background-color: gray;
+  }
   
   button:hover {
-    background-color: #90D5FF;
+    background-color: lightblue;
   }
+
   
   /* Basic CSS for the report section */
   h2 {
@@ -122,7 +131,7 @@ nav ul {
   #resultsContainer {
     display: block; /* Ensure it takes up the full width and starts below */
     clear: both;    /* Clear any floated elements above it */ 
-    margin-top: 20px;
+    margin-top: 40px;
     padding: 10px;
     border-top: 1px solid #ccc;
     overflow-y: auto; /* Enable vertical scrolling */

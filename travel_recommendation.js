@@ -1,6 +1,13 @@
 const btnSearch = document.getElementById('btnSearch');
 btnSearch.addEventListener('click', searchDestination);
 
+const btnClear = document.getElementById('btnClear');
+btnClear.addEventListener('click', clearBlank);
+
+function clearBlank () {
+     document.getElementById('keywordInput').value = '';  // Clear the input field
+}
+
 function searchDestination() {
     const resultDiv = document.getElementById('resultsContainer');
     const input = document.getElementById('keywordInput').value.toLowerCase();
@@ -19,25 +26,30 @@ function searchDestination() {
 
             let foundResults = false;
 
-        if (input === "countries") {
-            data.countries.forEach(country => {
-            const resultDiv = document.createElement('div');
-            resultDiv.classList.add('resultItem'); // Add a class for styling
-                
-                const name = country.name;
-                const imageUrl = country.cities[0].imageUrl; // Assuming you want to display the first city's image
-                const description = country.cities[0].description; // Same here
-
-                resultDiv.innerHTML = `
-              <h2>${name}</h2>
-              <img src="${imageUrl}" alt="${name}">
-              <p><strong>Description:</strong> ${description}</p>
-            `;
-
-            // Append this result to the container
-            resultsContainer.appendChild(resultDiv);
-            });
-
+            if (input === "countries") {
+                data.countries.forEach(country => {
+                    const resultDiv = document.createElement('div');
+                    resultDiv.classList.add('resultItem'); // Add a class for styling
+                            
+                    const name = country.name;
+                    
+                    // Loop through each city within the country
+                    country.cities.forEach(city => {
+                        const cityName = city.name;
+                        const imageUrl = city.imageUrl; // Get the image URL for the city
+                        const description = city.description; // Get the description for the city
+            
+                        resultDiv.innerHTML += `
+                            <h2>${name}</h2>
+                            <h3>${cityName}</h3>
+                            <img src="${imageUrl}" alt="${cityName}">
+                            <p><strong>Description:</strong> ${description}</p>
+                        `;
+                    });
+            
+                    // Append this result to the container
+                    resultsContainer.appendChild(resultDiv);
+                });                   
         } else if (input === "temples") {
             data.temples.forEach(temple => {
                 const resultDiv = document.createElement('div');
